@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,28 +9,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/trackCoverView"
-            android:layout_width="match_parent"
+            android:layout_width="97dp"
             android:layout_height="100dp"
-            android:scaleType="centerCrop" />
+            android:background="#399C27"
+            android:scaleType="centerCrop"
+            app:srcCompat="@android:drawable/ic_lock_power_off"
+            tools:srcCompat="@android:drawable/ic_lock_power_off" />
 
-        <TextView
-            android:id="@+id/trackTitleTextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trackTypeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/trackTitleTextView"
+                android:layout_width="295dp"
+                android:layout_height="64dp"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/trackTypeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

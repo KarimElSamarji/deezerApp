@@ -23,7 +23,7 @@ abstract class CallbackSearchTracks: Callback {
 
     override fun onResponse(call: Call, response: Response) {
         val responseData = response.body!!.string()
-        Log.d(TAG, "onResponse: ${responseData}")
+        Log.d(TAG, "onResponseTracks: ${responseData}")
 
         val gson = Gson()
         val data: TracksSearchResponse = gson.fromJson(
@@ -31,6 +31,6 @@ abstract class CallbackSearchTracks: Callback {
             TracksSearchResponse::class.java
         )
 
-        //fireOnResponseOk(data)
+        fireOnResponseOk(data)
     }
 }

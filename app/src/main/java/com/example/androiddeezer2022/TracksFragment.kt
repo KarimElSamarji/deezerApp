@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androiddeezer2022.service.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +25,8 @@ class TracksFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private lateinit var recyclerView: RecyclerView;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("TracksFragment", "onCreate:.................................. ")
@@ -37,9 +41,9 @@ class TracksFragment : Fragment() {
 
         val callback = object : CallbackSearchTracks() {
             override fun fireOnResponseOk(response: TracksSearchResponse) {
-//                requireActivity().runOnUiThread {
-//                    recyclerView.adapter = AlbumAdapter(response.data)
-//                }
+                requireActivity().runOnUiThread {
+                    recyclerView.adapter = TrackAdapter(response.tracks.data)
+                }
             }
         }
 
@@ -54,6 +58,14 @@ class TracksFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tracks, container, false)
+    }
+
+    override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(itemView, savedInstanceState)
+        recyclerView = itemView.findViewById(R.id.tracksRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+
     }
 
     companion object {
