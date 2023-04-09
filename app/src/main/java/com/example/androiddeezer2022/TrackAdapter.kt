@@ -1,6 +1,8 @@
 package com.example.androiddeezer2022
 
 import android.content.ContentValues
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,14 +34,28 @@ class TrackAdapter(private val trackList: List<Track>) :
         Log.d("TrackAdapter", "currentTrack.preview: ${currentTrack.md5_image}")
 
 
-//        holder.trackCoverView.setOnClickListener {
-//            Log.d(ContentValues.TAG, "click on ${currentTrack.title}")
-//        }
+        holder.trackCoverView.setOnClickListener {
+            Log.d(ContentValues.TAG, "click on ${currentTrack.title}")
+
+            val mediaPlayer = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+                Log.d("TrackAdapter", "currentTrack.link: ${currentTrack.link}")
+                setDataSource(currentTrack.preview)
+                prepare() // might take long! (for buffering, etc)
+                start()
+            }
+        }
     }
 
     override fun getItemCount() = trackList.size
 
     inner class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val trackCoverView: ImageView = itemView.findViewById(R.id.trackCoverView)
         val trackTitleTextView: TextView = itemView.findViewById(R.id.trackTitleTextView)
         val trackTypeTextView: TextView = itemView.findViewById(R.id.trackTypeTextView)
     }
