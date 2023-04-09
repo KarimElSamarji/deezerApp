@@ -7,13 +7,14 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 
-abstract class CallbackSearchArtist : Callback {
+
+abstract class CallbackSearchTracks: Callback {
 
     companion object {
-        private const val TAG = "CallSearchArtist"
+        private const val TAG = "CallSearchTracks"
     }
 
-    abstract fun fireOnResponseOk(data: ArtistSearchResponse)
+    abstract fun fireOnResponseOk(data: TracksSearchResponse)
 
 
     override fun onFailure(call: Call, e: IOException) {
@@ -25,13 +26,11 @@ abstract class CallbackSearchArtist : Callback {
         Log.d(TAG, "onResponse: ${responseData}")
 
         val gson = Gson()
-        val data: ArtistSearchResponse = gson.fromJson(
+        val data: TracksSearchResponse = gson.fromJson(
             responseData,
-            ArtistSearchResponse::class.java
+            TracksSearchResponse::class.java
         )
 
-        fireOnResponseOk(data)
+        //fireOnResponseOk(data)
     }
-
-
 }

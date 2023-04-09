@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.androiddeezer2022.service.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +30,23 @@ class TracksFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        val albumId = arguments?.getInt("album")
+        Log.d("AlbumsFragment", "albumId: $albumId")
+
+        val deezerService = DeezerService()
+
+        val callback = object : CallbackSearchTracks() {
+            override fun fireOnResponseOk(response: TracksSearchResponse) {
+//                requireActivity().runOnUiThread {
+//                    recyclerView.adapter = AlbumAdapter(response.data)
+//                }
+            }
+        }
+
+        deezerService.searchTracks(albumId, callback)
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

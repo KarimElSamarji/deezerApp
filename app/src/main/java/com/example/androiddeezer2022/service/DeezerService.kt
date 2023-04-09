@@ -20,4 +20,12 @@ class DeezerService {
         client.newCall(request).enqueue(callback)
     }
 
+    fun searchTracks(id: Int?, callback: CallbackSearchTracks) {
+        val client = OkHttpClient()
+        val request: Request = Request.Builder()
+            .url("https://api.deezer.com/album/${id}")
+            .build()
+        client.newCall(request).enqueue(callback)
+    }
+
 }

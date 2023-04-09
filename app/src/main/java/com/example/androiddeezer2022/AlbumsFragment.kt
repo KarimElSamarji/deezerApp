@@ -41,13 +41,11 @@ class AlbumsFragment : Fragment() {
 
         val callback = object : CallbackSearchAlbums() {
             override fun fireOnResponseOk(response: AlbumsSearchResponse) {
-//                Log.d("AlbumsFragment", "response: ${response.data}")
                 requireActivity().runOnUiThread {
                     recyclerView.adapter = AlbumAdapter(response.data)
                 }
             }
         }
-        Log.d("AlbumsFragment","...................................")
         deezerService.searchAlbums(artistId, callback)
     }
 
